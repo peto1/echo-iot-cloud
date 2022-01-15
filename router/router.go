@@ -1,8 +1,9 @@
 package router
 
 import (
-	"github.com/airren/echo-iot-backend/controller"
 	"github.com/gin-gonic/gin"
+
+	"github.com/airren/echo-iot-backend/controller"
 )
 
 func ApiV_1(r *gin.Engine) {

@@ -1,22 +1,24 @@
 package main
 
 import (
+	"net/http"
+
+	middleware2 "github.com/airren/echo-iot-backend/middleware"
+	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
+
 	"github.com/airren/echo-iot-backend/config"
 	"github.com/airren/echo-iot-backend/dal"
-	middleware2 "github.com/airren/echo-iot-backend/middleware"
+	"github.com/airren/echo-iot-backend/docs"
 	"github.com/airren/echo-iot-backend/router"
-	"github.com/gin-gonic/gin"
-
-	//"github.com/swaggo/gin-swagger" // gin-swagger middleware
-	//"github.com/swaggo/gin-swagger/swaggerFiles"
-	"net/http"
 )
 
-// @title Break Jail
+// @title Echo IoT Cloud
 // @version 0.0.1
-// @description Order Manager
+// @description PLC manager on Cloud
 // @contact.name Airren
-// @contact.email renqiang.luffy@bytedance.com
+// @contact.email renqiang@outlook.com
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 // @host localhost:8080
@@ -25,6 +27,7 @@ func main() {
 
 	config.AuthInit()
 	//r := gin.Default()
+	docs.SwaggerInfo.BasePath = "/api/v1"
 
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
@@ -46,7 +49,7 @@ func main() {
 		c.String(http.StatusOK, "ok: "+val)
 	})
 
-	//r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.ApiV_1(r)
 	_ = r.Run()
 
