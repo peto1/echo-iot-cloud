@@ -3,6 +3,7 @@ module github.com/airren/echo-iot-backend
 go 1.17
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/casdoor/casdoor-go-sdk v0.0.12
 	github.com/gin-gonic/gin v1.7.7
 	github.com/swaggo/gin-swagger v1.3.3

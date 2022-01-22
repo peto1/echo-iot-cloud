@@ -7,6 +7,9 @@ github.com/PuerkitoBio/purell
 # github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578
 ## explicit
 github.com/PuerkitoBio/urlesc
+# github.com/bwmarrin/snowflake v0.3.0
+## explicit
+github.com/bwmarrin/snowflake
 # github.com/casdoor/casdoor-go-sdk v0.0.12
 ## explicit; go 1.16
 github.com/casdoor/casdoor-go-sdk/auth

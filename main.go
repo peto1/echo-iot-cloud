@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 
-	middleware2 "github.com/airren/echo-iot-backend/middleware"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -11,6 +10,7 @@ import (
 	"github.com/airren/echo-iot-backend/config"
 	"github.com/airren/echo-iot-backend/dal"
 	"github.com/airren/echo-iot-backend/docs"
+	"github.com/airren/echo-iot-backend/middleware"
 	"github.com/airren/echo-iot-backend/router"
 )
 
@@ -32,7 +32,7 @@ func main() {
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 	router.UserAPI(r)
-	r.Use(middleware2.AuthMiddleware())
+	r.Use(middleware.AuthMiddleware())
 	err := dal.InitMySQL()
 	if err != nil {
 		panic(err)

@@ -4,7 +4,7 @@ import (
 	"github.com/airren/echo-iot-backend/dal"
 	"github.com/airren/echo-iot-backend/model"
 	"github.com/airren/echo-iot-backend/model/req"
-	"github.com/airren/echo-iot-backend/util"
+	"github.com/airren/echo-iot-backend/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -22,7 +22,7 @@ import (
 // @Param id path uint true "task id"
 func GetOrderById(c *gin.Context) {
 	idStr := c.Param("id")
-	ctx := util.GetOrgCtx(c)
+	ctx := utils.GetOrgCtx(c)
 
 	id, _ := strconv.Atoi(idStr)
 	task, _ := dal.GetOrderById(ctx, int64(id))
@@ -44,7 +44,7 @@ func CreateOrder(c *gin.Context) {
 	if err := c.Bind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, err)
 	}
-	ctx := util.GetOrgCtx(c)
+	ctx := utils.GetOrgCtx(c)
 	req.CreatedAt = time.Now().Local()
 	req.CreatedBy = "re"
 
@@ -67,7 +67,7 @@ func UpdateOrder(c *gin.Context) {
 	if err := c.Bind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, err)
 	}
-	ctx := util.GetOrgCtx(c)
+	ctx := utils.GetOrgCtx(c)
 	req.UpdatedAt = time.Now().Local()
 	req.UpdatedBy = "up"
 
@@ -91,7 +91,7 @@ func QueryOrders(c *gin.Context) {
 	if err := c.Bind(&taskReq); err != nil {
 		c.JSON(http.StatusBadRequest, err)
 	}
-	ctx := util.GetOrgCtx(c)
+	ctx := utils.GetOrgCtx(c)
 
 	task, _ := dal.QueryOrders(ctx, &taskReq)
 	c.JSON(http.StatusOK, task)
